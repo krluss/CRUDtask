@@ -16,19 +16,31 @@ interface Radius {
 })
 export class EditCampaignComponent implements OnInit {
 
-  campaignRef: any
+  campaignRef: any;
   editForm !: FormGroup;
+  
   constructor(
     private formBuilder : FormBuilder,
     private afs : AngularFirestore, 
     private dialogRef : MatDialogRef<EditCampaignComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any) { }
+    @Inject(MAT_DIALOG_DATA) public data:any) {
+      this.editForm = this.formBuilder.group({
+        campaignName : [''],
+        campaignKeywords : [''],
+        campaignBidAmount : [''],
+        campaignFund : [''],
+        campaignStatus : [''],
+        campaignTown : [''],
+        campaignRadius : ['']
+      })
+     }
 
   ngOnInit(): void {
     const querySnapshot = this.afs.collection('Campaigns').doc(this.data.id).valueChanges();
 
     querySnapshot.subscribe(res => {
       this.campaignRef = res
+
       this.editForm = this.formBuilder.group({
         campaignName : [this.campaignRef.campaignName , Validators.required],
         campaignKeywords : [this.campaignRef.campaignKeywords, Validators.required],
@@ -54,7 +66,9 @@ export class EditCampaignComponent implements OnInit {
 
 
   updateCampaign(){
-    console.log('siema')
+    this.afs.collection('Campaigns').doc(this.data.id).update(this.editForm.value)
+    this.editForm.reset();
+    this.dialogRef.close();
   }
 
   

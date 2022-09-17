@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule} from '@angular/fire/compat';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddCampaignComponent } from './add-campaign/add-campaign.component';
 import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
-import { ViewCampaignComponent } from './view-campaign/view-campaign.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -29,7 +27,6 @@ import { environment } from 'src/environments/environment';
     HomeComponent,
     AddCampaignComponent,
     EditCampaignComponent,
-    ViewCampaignComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,10 @@ export class AddCampaignComponent implements OnInit {
 
 
   campaignForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private afs : AngularFirestore, private dialogRef : MatDialogRef<AddCampaignComponent>) { }
+  constructor(
+    private formBuilder : FormBuilder, 
+    private afs : AngularFirestore, 
+    private dialogRef : MatDialogRef<AddCampaignComponent>) { }
 
   ngOnInit(): void {
     this.campaignForm = this.formBuilder.group({
