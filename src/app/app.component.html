@@ -4,5 +4,38 @@
  </button>
  <span>CRUD task</span>
  <span class="spacer"></span>
- <button mat-raised-button color="warn" (click)="openDialog()">Add Campaign</button>
+ <button mat-raised-button color="warn" (click)="openAddCampaignDialog()">Add Campaign</button>
 </mat-toolbar>
+<div class="container">
+    <table class="campaign">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Keywords</th>
+          <th scope="col">Bid Amount</th>
+          <th scope="col">Fund</th>
+          <th scope="col">Status</th>
+          <th scope="col">Town</th>
+          <th scope="col">Radius</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let campaign of campaignList">
+          <td>{{campaign.campaignName}}</td>
+          <td>{{campaign.campaignKeywords}}</td>
+          <td>{{campaign.campaignBidAmount}}</td>
+          <td>{{campaign.campaignFund}}</td>
+          <td>{{campaign.campaignStatus}}</td>
+          <td>{{campaign.campaignTown}}</td>
+          <td>{{campaign.campaignRadius}}</td>
+          <td>
+            <button mat-button color="accent" (click)="openEditCampaignDialog(campaign.id)">Edit</button>
+            <button mat-button color="warn" (click)="deleteCampaign(campaign.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+

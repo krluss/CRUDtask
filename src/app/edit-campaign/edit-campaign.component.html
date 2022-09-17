@@ -1,1 +1,42 @@
-<p>edit-campaign works!</p>
+<h1 mat-dialog-title>Edit Campaign</h1>
+<div mat-dialog-content>
+    <form [formGroup]="editForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Campaign Name</mat-label>
+            <input formControlName="campaignName" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Keywords</mat-label>
+            <input formControlName="campaignKeywords" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Bid amount</mat-label>
+            <input formControlName="campaignBidAmount" matInput />
+        </mat-form-field> 
+        <mat-form-field appearance="outline">
+            <mat-label>Campaign fund</mat-label>
+            <input formControlName="campaignFund" matInput />
+        </mat-form-field> 
+            <mat-label>Status</mat-label>
+                <mat-radio-group class="radio-group" formControlName="campaignStatus">
+                    <mat-radio-button class="radio-button" value="On">On</mat-radio-button>
+                    <mat-radio-button class="radio-button" value="Off">Off</mat-radio-button>
+                </mat-radio-group>
+        <mat-form-field appearance="outline">
+            <mat-label>Town</mat-label>
+            <input formControlName="campaignTown" matInput />
+        </mat-form-field>  
+        <mat-form-field appearance="fill">
+            <mat-label>Radius</mat-label>
+            <mat-select formControlName="campaignRadius">
+              <mat-option *ngFor="let radius of radiuses" [value]="radius.value">
+                {{radius.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> 
+    </form>  
+</div>
+<div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="updateCampaign()">Save</button>
+</div>
