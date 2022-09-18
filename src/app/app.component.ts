@@ -13,6 +13,7 @@ import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
 })
 export class AppComponent implements OnInit{
 
+  title = 'CRUDtask'
   campaignList : any = []
   campaign: any = {}
 
