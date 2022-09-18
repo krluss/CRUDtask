@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
@@ -42,6 +43,7 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     FormsModule,
     MatRadioModule,
+    MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [],

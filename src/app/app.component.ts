@@ -15,7 +15,6 @@ export class AppComponent implements OnInit{
 
   title = 'CRUDtask'
   campaignList : any = []
-  campaign: any = {}
 
   constructor(private dialog: MatDialog, private afs : AngularFirestore) {}
   openAddCampaignDialog() {
@@ -49,8 +48,6 @@ export class AppComponent implements OnInit{
     })
   }
 
-  
-
   deleteCampaign(id: any){
     if(window.confirm('Are you sure you want to delete this campaign?'))
     this.afs.collection('Campaigns').doc(id).delete() 
@@ -63,6 +60,5 @@ export class AppComponent implements OnInit{
       this.openEditCampaignDialog(data);
     })
   }
-
 
 }

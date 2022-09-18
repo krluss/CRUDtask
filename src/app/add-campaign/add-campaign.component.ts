@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { MatDialogRef } from '@angular/material/dialog'
+import { MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 
 interface Radius {
@@ -16,6 +18,9 @@ interface Radius {
 })
 export class AddCampaignComponent implements OnInit {
 
+  myControl = new FormControl('');
+  options: string[] = ['Warszawa', 'Kraków', 'Gdańsk', 'Gdynia', 'Łódź', 'Wrocław', 'Szczecin'];
+  filteredOptions: Observable<string[]> | undefined;
 
   campaignForm !: FormGroup;
   constructor(
@@ -23,16 +28,29 @@ export class AddCampaignComponent implements OnInit {
     private afs : AngularFirestore, 
     private dialogRef : MatDialogRef<AddCampaignComponent>) { }
 
+    
+
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+
     this.campaignForm = this.formBuilder.group({
       campaignName : ['', Validators.required],
       campaignKeywords : ['', Validators.required],
-      campaignBidAmount : ['', Validators.required],
+      campaignBidAmount : ['', Validators.min(1)],
       campaignFund : ['', Validators.required],
       campaignStatus : ['', Validators.required],
       campaignTown : ['', Validators.required],
       campaignRadius : ['', Validators.required],
     })
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   radiuses: Radius[] = [
